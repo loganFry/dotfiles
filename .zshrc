@@ -106,5 +106,8 @@ source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # shorten keytimeout delay to make switching vim modes faster
 export KEYTIMEOUT=1
 
+# Change autosuggestion color so it is visible
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 alias config='/usr/bin/git --git-dir=/home/fry/.cfg/ --work-tree=/home/fry'
