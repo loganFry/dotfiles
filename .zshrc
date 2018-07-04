@@ -61,6 +61,7 @@ plugins=(
   vi-mode
   git
   zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -93,9 +94,6 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 alias zshrefresh="source ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
 
-# zsh syntax highlighting plugin
-source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # z directory plugin
 . ~/.oh-my-zsh/z/z.sh
 
@@ -103,7 +101,7 @@ source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export KEYTIMEOUT=1
 
 # Change autosuggestion color so it is visible
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=23'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 alias config='/usr/bin/git --git-dir=/home/fry/.cfg/ --work-tree=/home/fry'
