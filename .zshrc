@@ -94,6 +94,9 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 alias zshrefresh="source ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
 
+# Set Ctrl-f to choose first word of autosuggestion
+bindkey "^F" forward-word
+
 # z directory plugin
 . ~/.oh-my-zsh/z/z.sh
 
