@@ -34,13 +34,38 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Switch between the last two files
+nnoremap <Leader><Leader> <C-^>
+
 " initialize solarized colorscheme
 syntax enable
 set background=dark
 colorscheme solarized
 
+" No weirdness with swap files
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Show incomplete commands
+set showcmd
+
 " Hybrid line numbers 
 set number relativenumber
+
+" Search options
+" Lower case search case insensitive, upper case search case sensitive
+set ignorecase
+set smartcase
+
+" Show the next match while entering the search string
+set incsearch
+
+" Highlight search matches
+set hlsearch
+
+" Press return to clear highlighting after a search
+nnoremap <CR> :nohlsearch<CR><CR>
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
@@ -72,6 +97,7 @@ map <leader>d  :NERDTreeToggle<CR>
 " Run fzf fuzzy finder
 map <leader>f :Files<CR>
 map <leader>b :Buffers<CR>
+map <leader>l :Lines<CR>
 
 " Refresh .vimrc
 map <leader>r :source ~/.vimrc<CR>
