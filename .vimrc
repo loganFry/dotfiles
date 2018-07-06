@@ -104,8 +104,10 @@ map <leader>l :Lines<CR>
 " Refresh .vimrc
 map <leader>r :source ~/.vimrc<CR>
 
+" Use arrow keys to navigate between buffers
+nnoremap <Left> :bp<CR>
+nnoremap <Right> :bn<CR>
+
 " Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
