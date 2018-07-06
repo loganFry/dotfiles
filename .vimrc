@@ -1,4 +1,6 @@
 " Section for vim plugins
+" Increase plugin install timeout
+let g:plug_timeout = 1000
 
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
@@ -18,6 +20,12 @@ Plug 'vim-airline/vim-airline-themes'
 " solarized colorscheme
 Plug 'micha/vim-colors-solarized'
 
+" YouCompleteMe autocompletion
+Plug 'Valloric/YouCompleteMe'
+
+" Better vim+tmux navigation
+Plug 'christoomey/vim-tmux-navigator'
+
 " Initialize plugin system
 call plug#end()
 
@@ -27,12 +35,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " Automatically open NERDTree if vim is opened with a directory
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
-" Easier navigation between splits
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 
 " Switch between the last two files
 nnoremap <Leader><Leader> <C-^>
