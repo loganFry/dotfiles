@@ -97,6 +97,9 @@ alias vimconfig="vim ~/.vimrc"
 # Set Ctrl-f to choose first word of autosuggestion
 bindkey "^F" forward-word
 
+# Set Ctrl-e to choose entire autosuggestion
+bindkey "^E" end-of-line
+
 # z directory plugin
 . ~/.oh-my-zsh/z/z.sh
 
