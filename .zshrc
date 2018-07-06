@@ -92,6 +92,7 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias zshrefresh="source ~/.zshrc"
+alias tmuxrefresh="tmux source-file ~/.tmux.conf"
 alias vimconfig="vim ~/.vimrc"
 
 # Set Ctrl-f to choose first word of autosuggestion
