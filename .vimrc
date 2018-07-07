@@ -26,6 +26,9 @@ Plug 'Valloric/YouCompleteMe'
 " Better vim+tmux navigation
 Plug 'christoomey/vim-tmux-navigator'
 
+" Git indicators in vim gutter
+Plug 'airblade/vim-gitgutter'
+
 " Initialize plugin system
 call plug#end()
 
@@ -38,6 +41,12 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 " Switch between the last two files
 nnoremap <Leader><Leader> <C-^>
+
+" Toggle git gutter line highlights
+nnoremap <Leader>lh :GitGutterLineHighlightsToggle<CR>
+
+" Decrease vim updatetime so gitgutter updates faster
+set updatetime=100
 
 " initialize solarized colorscheme
 syntax enable
@@ -62,12 +71,6 @@ set smartcase
 
 " Show the next match while entering the search string
 set incsearch
-
-" Highlight search matches
-set hlsearch
-
-" Press return to clear highlighting after a search
-nnoremap <CR> :nohlsearch<CR><CR>
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
@@ -94,15 +97,15 @@ set splitright
 let mapleader = " "
 
 " Toggle NERDTree
-map <leader>d  :NERDTreeToggle<CR>
+nnoremap <leader>d  :NERDTreeToggle<CR>
 
 " Run fzf fuzzy finder
-map <leader>f :Files<CR>
-map <leader>b :Buffers<CR>
-map <leader>l :Lines<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>l :Lines<CR>
 
 " Refresh .vimrc
-map <leader>r :source ~/.vimrc<CR>
+nnoremap <leader>r :source ~/.vimrc<CR>
 
 " Use arrow keys to navigate between buffers
 nnoremap <Left> :bp<CR>
