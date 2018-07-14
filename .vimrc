@@ -51,6 +51,9 @@ Plug 'zchee/deoplete-zsh'
 " Easily change surrounding characters
 Plug 'tpope/vim-surround'
 
+" ALE asynchronous linter
+Plug 'w0rp/ale'
+
 " Initialize plugin system
 call plug#end()
 
@@ -93,7 +96,7 @@ set incsearch
 let g:airline#extensions#tabline#enabled = 1
 
 " Make all buffers except netrw hidden
-set nohidden
+set hidden 
 
 " Indent settings
 filetype plugin indent on
@@ -114,7 +117,13 @@ set path+=**
 " Display all matching files upon tab completion
 set wildmenu
 
+" Show hidden files in fzf 
 let $FZF_DEFAULT_COMMAND = 'find .'
+
+" ALE config
+let g:ale_fixers = {
+ \'python': [ 'autopep8', 'trim_whitespace', 'yapf', 'isort', 'remove_trailing_lines' ]
+ \}
 
 " Keybindings
 " Set leader key
@@ -146,3 +155,6 @@ nnoremap <leader><leader> <C-^>
 
 " Toggle git gutter line highlights
 nnoremap <leader>lh :GitGutterLineHighlightsToggle<CR>
+
+" Fix current file with Ale
+nmap <leader>af :ALEFix<CR> 
