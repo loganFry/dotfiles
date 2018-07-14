@@ -5,14 +5,6 @@ let g:plug_timeout = 1000
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
-" NERDTree file explorer
-Plug 'scrooloose/nerdtree'
-
-" fzf fuzzy file finder
-" PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run install script
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
 " vim-airline status bar and themes
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -20,30 +12,52 @@ Plug 'vim-airline/vim-airline-themes'
 " solarized colorscheme
 Plug 'micha/vim-colors-solarized'
 
-" YouCompleteMe autocompletion
-Plug 'Valloric/YouCompleteMe'
-
 " Better vim+tmux navigation
 Plug 'christoomey/vim-tmux-navigator'
 
 " Git indicators in vim gutter
 Plug 'airblade/vim-gitgutter'
 
+" PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run install script
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" NERDTree file explorer
+Plug 'scrooloose/nerdtree'
+
+" automatically close paired characters
+Plug 'jiangmiao/auto-pairs'
+
+" deoplete completion
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+" deoplete completion sources
+Plug 'Shougo/neco-syntax'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'zchee/deoplete-jedi'
+Plug 'Shougo/neco-vim'
+Plug 'zchee/deoplete-zsh'
+
+" Easily change surrounding characters
+Plug 'tpope/vim-surround'
+
 " Initialize plugin system
 call plug#end()
 
-" Close vim if only a NERDTree tab is left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:deoplete#enable_at_startup = 1
 
-" Automatically open NERDTree if vim is opened with a directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
-" Switch between the last two files
-nnoremap <Leader><Leader> <C-^>
-
-" Toggle git gutter line highlights
-nnoremap <Leader>lh :GitGutterLineHighlightsToggle<CR>
+" Create the tags file for the entire project
+command! MakeTags !ctags -R .
 
 " Decrease vim updatetime so gitgutter updates faster
 set updatetime=100
@@ -57,6 +71,9 @@ colorscheme solarized
 set nobackup
 set nowritebackup
 set noswapfile
+
+" Don't wrap lines
+set nowrap
 
 " Show incomplete commands
 set showcmd
@@ -75,9 +92,8 @@ set incsearch
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
 
-" This allows buffers to be hidden if you've modified a buffer.
-" This is almost a must if you wish to use buffers in this way.
-set hidden
+" Make all buffers except netrw hidden
+set nohidden
 
 " Indent settings
 filetype plugin indent on
@@ -92,17 +108,17 @@ set expandtab
 set splitbelow
 set splitright
 
+" Make file commands search directories recursively
+set path+=**
+
+" Display all matching files upon tab completion
+set wildmenu
+
+let $FZF_DEFAULT_COMMAND = 'find .'
+
 " Keybindings
 " Set leader key
 let mapleader = " "
-
-" Toggle NERDTree
-nnoremap <leader>d  :NERDTreeToggle<CR>
-
-" Run fzf fuzzy finder
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>l :Lines<CR>
 
 " Refresh .vimrc
 nnoremap <leader>r :source ~/.vimrc<CR>
@@ -111,6 +127,22 @@ nnoremap <leader>r :source ~/.vimrc<CR>
 nnoremap <Left> :bp<CR>
 nnoremap <Right> :bn<CR>
 
+" Close the current buffer
+nnoremap <leader>x :bd<CR>
+
 " Get off my lawn
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
+
+" FZF shortcuts
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+
+" Toggle NERDTree file explorer
+nnoremap <leader>d :NERDTreeToggle<CR>
+
+" Switch between the last two files
+nnoremap <leader><leader> <C-^>
+
+" Toggle git gutter line highlights
+nnoremap <leader>lh :GitGutterLineHighlightsToggle<CR>
