@@ -111,9 +111,6 @@ set expandtab
 set splitbelow
 set splitright
 
-" Make file commands search directories recursively
-set path+=**
-
 " Display all matching files upon tab completion
 set wildmenu
 
