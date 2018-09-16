@@ -83,18 +83,32 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+# Functions
+
+# Automatically ls after cd'ing into a valid directory
+function cdls() {
+       cd $1 && ls -A 
+}
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias zshrefresh="source ~/.zshrc"
 alias tmuxrefresh="tmux source-file ~/.tmux.conf"
 alias vimconfig="vim ~/.vimrc"
 alias mypi="ssh pi@192.168.0.23"
+
+# OSU network printing shortcuts
+alias printA="lpr -P lj_cl_112_a"
+alias printB="lpr -P lj_cl_112_b"
+alias printC="lpr -P lj_cl_112_c"
+alias printD="lpr -P lj_cl_112_d"
+
+# setup alias for modifiying hidden config repo 
+alias config='/usr/bin/git --git-dir=/home/fry/.cfg/ --work-tree=/home/fry'
 
 # Set Ctrl-f to choose first word of autosuggestion
 bindkey "^F" forward-word
@@ -106,10 +120,10 @@ bindkey "^E" end-of-line
 . ~/.oh-my-zsh/z/z.sh
 
 # shorten keytimeout delay to make switching vim modes faster
-export KEYTIMEOUT=1
+#export KEYTIMEOUT=1
 
 # Change autosuggestion color so it is visible
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=23'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-alias config='/usr/bin/git --git-dir=/home/fry/.cfg/ --work-tree=/home/fry'
+
