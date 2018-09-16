@@ -106,7 +106,17 @@ set tabstop=4
 set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
-    
+
+" python specific formatting settings
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+    \ set colorcolumn=80
+
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
@@ -135,10 +145,6 @@ nnoremap <Right> :bn<CR>
 
 " Close the current buffer
 nnoremap <leader>x :bd<CR>
-
-" Get off my lawn
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
 
 " FZF shortcuts
 nnoremap <leader>f :Files<CR>
