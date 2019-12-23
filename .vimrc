@@ -44,6 +44,16 @@ set noshiftround
 nnoremap j gj
 nnoremap k gk
 
+" Move between splits with C-j,k,l,h
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Open splits to bottom and right
+set splitbelow
+set splitright
+
 " Allow hidden buffers
 set hidden
 
