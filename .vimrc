@@ -1,163 +1,75 @@
-" Section for vim plugins
-" Increase plugin install timeout
-let g:plug_timeout = 1000
+" Don't try to be vi compatible
+set nocompatible
 
-" Specify a directory for plugins
-call plug#begin('~/.vim/plugged')
+" Helps force plugins to load correctly when it is turned back on below
+filetype off
 
-" vim-airline status bar and themes
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" TODO: Load plugins here (pathogen or vundle)
 
-" solarized colorscheme
-Plug 'micha/vim-colors-solarized'
+" Turn on syntax highlighting
+syntax on
 
-" Better vim+tmux navigation
-Plug 'christoomey/vim-tmux-navigator'
+" For plugins to load correctly
+filetype plugin indent on
 
-" Git indicators in vim gutter
-Plug 'airblade/vim-gitgutter'
+" TODO: Pick a leader key
+let mapleader = ","
 
-" PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run install script
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" Security
+set modelines=0
 
-" NERDTree file explorer
-Plug 'scrooloose/nerdtree'
+" Show line numbers
+set number
 
-" automatically close paired characters
-Plug 'jiangmiao/auto-pairs'
+" Show file stats
+set ruler
 
-" deoplete completion
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" Blink cursor on error instead of beeping (grr)
+set visualbell
 
-" deoplete completion sources
-Plug 'Shougo/neco-syntax'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-Plug 'zchee/deoplete-jedi'
-Plug 'Shougo/neco-vim'
-Plug 'zchee/deoplete-zsh'
+" Encoding
+set encoding=utf-8
 
-" Easily change surrounding characters
-Plug 'tpope/vim-surround'
+" Whitespace
+set wrap
+set textwidth=79
+set formatoptions=tcqrn1
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set noshiftround
 
-" ALE asynchronous linter
-Plug 'w0rp/ale'
+" Move up/down editor lines
+nnoremap j gj
+nnoremap k gk
 
-" Initialize plugin system
-call plug#end()
+" Allow hidden buffers
+set hidden
 
-let g:deoplete#enable_at_startup = 1
+" Rendering
+set ttyfast
 
-" Create the tags file for the entire project
-command! MakeTags !ctags -R .
+" Status bar
+set laststatus=2
 
-" Decrease vim updatetime so gitgutter updates faster
-set updatetime=100
-
-" initialize solarized colorscheme
-syntax enable
-set background=dark
-colorscheme solarized
-
-" No weirdness with swap files
-set nobackup
-set nowritebackup
-set noswapfile
-
-" Don't wrap lines
-set nowrap
-
-" Show incomplete commands
+" Last line
+set showmode
 set showcmd
 
-" Hybrid line numbers 
-set number relativenumber
-
-" Search options
-" Lower case search case insensitive, upper case search case sensitive
+" Searching
+nnoremap / /\v
+vnoremap / /\v
+set hlsearch
+set incsearch
 set ignorecase
 set smartcase
+set showmatch
+map <leader><space> :let @/=''<cr> " clear search
 
-" Show the next match while entering the search string
-set incsearch
-
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-
-" Make all buffers except netrw hidden
-set hidden 
-
-" Indent settings
-filetype plugin indent on
-" show existing tab with 4 spaces width
-set tabstop=4
-" when indenting with '>', use 4 spaces width
-set shiftwidth=4
-" On pressing tab, insert 4 spaces
-set expandtab
-
-" python specific formatting settings
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix |
-    \ set colorcolumn=80
-
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-
-" Display all matching files upon tab completion
-set wildmenu
-
-" Show hidden files in fzf 
-let $FZF_DEFAULT_COMMAND = 'find .'
-
-" ALE config
-let g:ale_fixers = {
- \'python': [ 'autopep8', 'trim_whitespace', 'yapf', 'isort', 'remove_trailing_lines' ]
- \}
-
-" Keybindings
-" Set leader key
-let mapleader = " "
-
-" Refresh .vimrc
-nnoremap <leader>r :source ~/.vimrc<CR>
-
-" Use arrow keys to navigate between buffers
-nnoremap <Left> :bp<CR>
-nnoremap <Right> :bn<CR>
-
-" Close the current buffer
-nnoremap <leader>x :bd<CR>
-
-" FZF shortcuts
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-
-" Toggle NERDTree file explorer
-nnoremap <leader>d :NERDTreeToggle<CR>
-
-" Switch between the last two files
-nnoremap <leader><leader> <C-^>
-
-" Toggle git gutter line highlights
-nnoremap <leader>lh :GitGutterLineHighlightsToggle<CR>
-
-" Fix current file with Ale
-nmap <leader>af :ALEFix<CR> 
+" Visualize tabs and newlines
+set listchars=tab:▸\ ,eol:¬
+" Uncomment this to enable by default:
+" set list " To enable by default
+" Or use your leader key + l to toggle on/off
+map <leader>l :set list!<CR> " Toggle tabs and EOL
